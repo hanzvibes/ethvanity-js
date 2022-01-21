@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+## Apa Itu Vanity Address ?
 
-You can use the [editor on GitHub](https://github.com/hanzvibes/ethvanity-js/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Adalah Alamat Mata Uang Kripto Yang Dipersonalisasi dan Dibuat Dengan Serangkaian Parameter Yang Diberikan Oleh Pengguna Alamat Tersebut Dengan Tujuan Membuat Alamat Lebih Pribadi dan Mudah Dikenali
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Contoh Alamat Cantik
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/example.png)
 
-```markdown
-Syntax highlighted code block
+Untuk Detail Lebih Lanjut Silahkan Kunjungi [GitHub Repo](https://github.com/hanzvibes/ethvanity-js).
 
-# Header 1
-## Header 2
-### Header 3
+### Keamanan
 
-- Bulleted
-- List
+Harap Simpan Private-key / Mnemonic Phrase Dengan Benar, Script Ini Aman Dan Tidak Mengambil Data Kalian Sedikitpun, Serta Bisa Dijalankan Secara Offline 100% Pada Device Kalian
 
-1. Numbered
-2. List
+### Dimana Saya Bisa Menemukan File Address Saya ?
 
-**Bold** and _Italic_ and `Code` text
+File Output Tersimpan Otomatis Dengan Nama ``address_0xxxxx.txt``
 
-[Link](url) and ![Image](src)
-```
+### Contact Me
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hanzvibes/ethvanity-js/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+- [Facebook](https://fb.me/4RAEHAN)
+- [Instagram](https://instagram.com/hanzvibes)
