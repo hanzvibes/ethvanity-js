@@ -1,5 +1,5 @@
 
-![Logo](https://github.com/hanzvibes/ethvanity-js/raw/main/vanity.png)
+![Logo](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/vanity.png)
 
 A Simple Script for Generate Vanity Address with CLI , I was recode This from [@ppabcd](https://github.com/ppabcd/vanity-cli)
 
@@ -58,15 +58,15 @@ let minLength = yourlength;
 
 ## 📱 CLI Output Example
 
-![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/output.png)
+![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/output.png)
 
 ## 📱Output Files Example
 
-![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/address_0x00000.png)
+![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/address_0x00000.png)
 
 ## 📱Example of my Vanity Address
 
-![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/example.png)
+![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/example.png)
 
 
 
