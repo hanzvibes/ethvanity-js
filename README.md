@@ -60,6 +60,9 @@ let minLength = yourlength;
 
 ![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/output.png)
 
+## 📱Output file Example
+
+![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/file_output.png)
 
 ## 📱Example of my Vanity Address
 
