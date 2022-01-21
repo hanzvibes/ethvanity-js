@@ -7,7 +7,7 @@ Adalah Alamat Mata Uang Kripto Yang Dipersonalisasi dan Dibuat Dengan Serangkaia
 
 ![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/example.png)
 
-Untuk Detail Lebih Lanjut Silahkan Kunjungi [GitHub Repo](https://github.com/hanzvibes/ethvanity-js).
+Silahkan Kunjungi [GitHub Repo](https://github.com/hanzvibes/ethvanity-js) Untuk Membuat Vanity Address
 
 ### Keamanan
 
