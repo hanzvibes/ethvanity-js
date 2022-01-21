@@ -85,7 +85,7 @@ const getVanityWallet = async (input, isChecksum, isSuffix, minLength, cb) => {
             if(isValidVanityAddress(wallet.address, input.substr(0, input.length-j), isChecksum, isSuffix)){
                 // Write to file
                 fs.appendFileSync('address_0x'+input.substr(0, input.length-j)+'.txt', "Address : 0x"+ toChecksumAddress(wallet.address) + '\n' + "Private Key : "+ wallet.privKey + '\n\n');
-                cb(`✓ 0x${toChecksumAddress(wallet.address)} / ${attempts} attempts`);
+                cb(`- 0x${toChecksumAddress(wallet.address)} | ${attempts} attempts`);
                 attempts = 0;
                 break;
             }
