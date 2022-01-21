@@ -1,6 +1,5 @@
 
 ![Logo](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/vanity.png)
-
 A Simple Script for Generate Vanity Address with CLI , I was recode This from [@ppabcd](https://github.com/ppabcd/vanity-cli)
 
 
@@ -10,6 +9,7 @@ A Simple Script for Generate Vanity Address with CLI , I was recode This from [@
 - More efficient usage of resources
 - Mobile-friendly
 - 100% Offline
+
 ## 📂 Clone Repository & Install
 
 ```bash
@@ -51,8 +51,10 @@ getVanityWallet('yourinput', false, yourchecksum, yourlength, (message) => {
 let input = 'yourinput';
 let minLength = yourlength;
 
-* Maximum Input is 8 Characters
-* Recommended Length is 2 - 4
+- yourinput = A - F / 0 - 8 , for example 000 / deadd / b00b
+- yourlength = 2 - 5
+
+* Recommended Length is 2 / 3
 ```
 
 
