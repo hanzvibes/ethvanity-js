@@ -19,7 +19,7 @@ for(;;){
                 "Address : 0x"+ toChecksumAddress(addr) + '\n' + 
                 "Private Key : "+ wallet.getPrivateKey(wallet.getAddresses()[0]).toString('hex') + '\n' +  
                 "Mnemonic : "+ mnemonic + '\n\n');
-            console.log(`✓ 0x${toChecksumAddress(addr)} / ${attempts} attempts`);
+            console.log(`- 0x${toChecksumAddress(addr)} | ${attempts} attempts`);
             attempts = 0;
             break;
         }
