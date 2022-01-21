@@ -56,11 +56,11 @@ let minLength = yourlength;
 ```
 
 
-## 📱 Output Example
+## 📱 CLI Output Example
 
 ![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/output.png)
 
-## 📱Output file Example
+## 📱Output Files Example
 
 ![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/address_0x00000.png)
 
