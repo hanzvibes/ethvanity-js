@@ -1,10 +1,5 @@
 
-# Ethereum Vanity Address Generator
-
-A brief description of what this project does and who it's for
-
-
-![Logo](https://github.com/hanzvibes/ethvanity-js/raw/main/logo.png)
+![Logo](https://github.com/hanzvibes/ethvanity-js/raw/main/vanity.png)
 
 
 ## Features
@@ -56,3 +51,7 @@ let minLength = yourlength;
 * Recommended Length is 2 - 4
 ```
 
+## Source Code ( Original )
+- [@ppabcd](https://github.com/ppabcd/vanity-cli)
+## Source Code vanity.js
+- [@bokub](https://github.com/bokub/vanity-eth) ( vanity-eth.tk )
