@@ -1,10 +1,18 @@
 {
     "dependencies": {
+        "ansi-colors": "^4.1.1",
         "crypto-js": "^3.3.0",
         "eth-hd-wallet": "^0.5.1",
         "ethereumjs-wallet": "^1.0.2",
+        "ethers": "^5.5.3",
         "keccak": "^3.0.1",
+        "loading-cli": "^1.1.0",
+        "pidusage": "^3.0.0",
         "randombytes": "^2.0.6",
-        "secp256k1": "^3.8.0"
+        "secp256k1": "^3.8.0",
+        "terminal-kit": "^2.4.0"
+    },
+    "devDependencies": {
+        "colors-cli": "^1.0.28"
     }
 }
