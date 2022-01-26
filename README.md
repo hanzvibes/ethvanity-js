@@ -1,7 +1,13 @@
-
 ![Logo](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/vanity.png)
 A Simple Script for Generate Vanity Address with CLI , I was recode This from [@ppabcd](https://github.com/ppabcd/vanity-cli)
 
+![GitHub top language](https://img.shields.io/github/languages/top/hanzvibes/ethvanity-js?style=for-the-badge)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/hanzvibes/ethvanity-js?style=flat-square)
+
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hanzvibes/ethvanity-js?style=flat-square)
+
+![GitHub](https://img.shields.io/github/license/hanzvibes/ethvanity-js?style=flat-square)
 
 ## 🌟 Features
 
