@@ -10,6 +10,6 @@ console.log("\nGenerating Vanity Address....\n")
  - isSuffix = 'true' Is a suffix , 'false' is a prefix
  - cb = Callback called after x attempts, or when an address if found
  */
-getVanityWallet('00000000', false, false, 2, (message) => {
+getVanityWallet('00000000', false, false, 4, (message) => {
     console.log(message)
 })
