@@ -83,10 +83,6 @@ let minLength = yourlength;
 ## 🔗 Source Code vanity.js
 - [@bokub](https://github.com/bokub/vanity-eth) ( vanity-eth.tk )
 
-## 🌐 Join My Telegram
-
-- https://t.me/whendistriser
-
 ## 👥 Contact Me
 
 - [Facebook](https://fb.me/4RAEHAN)
