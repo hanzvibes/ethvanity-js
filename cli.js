@@ -6,7 +6,6 @@ const { findVanityWallet } = require('./vanity.js');
 const C = {
     reset: '\x1b[0m',
     bold: '\x1b[1m',
-    dim: '\x1b[2m',
     gray: '\x1b[38;5;244m',
     faint: '\x1b[38;5;240m',
     accent: '\x1b[38;5;180m',
@@ -18,12 +17,11 @@ const C = {
 
 const paint = (color, value) => `${color}${value}${C.reset}`;
 const fmt = new Intl.NumberFormat('en-US');
-
 const divider = () => console.log(paint(C.faint, '────────────────────────────────────────────────────────────'));
 
 const banner = () => {
     console.clear();
-    console.log(`${paint(C.bold, 'ethvanity')}  ${paint(C.accent, 'AI agent')}  ${paint(C.gray, 'local secrets')}`);
+    console.log(`${paint(C.bold, 'ethvanity')}  ${paint(C.accent, 'local agent')}  ${paint(C.gray, 'local secrets')}`);
     console.log(paint(C.gray, 'Ethereum vanity wallet terminal · secrets never leave this process'));
     divider();
     console.log(`${paint(C.accent, '›')} Type ${paint(C.bold, 'run CAFE')} to search, ${paint(C.bold, 'help')} for commands.`);
@@ -46,12 +44,20 @@ const parsePattern = (value) => {
     return pattern;
 };
 
-const writeSecretFile = (result, pattern) => {
+const timestampSlug = () => new Date().toISOString().replace(/[:.]/g, '-');
+
+const writeSecretFile = (result, pattern, isSuffix) => {
+    const outputDir = path.resolve(process.cwd(), 'wallets');
+    fs.mkdirSync(outputDir, { recursive: true, mode: 0o700 });
+
     const safePattern = pattern.toLowerCase();
-    const filename = `address_0x${safePattern}.txt`;
-    const filepath = path.resolve(process.cwd(), filename);
+    const side = isSuffix ? 'suffix' : 'prefix';
+    const addressTail = result.address.slice(-8).toLowerCase();
+    const filename = `${safePattern}-${side}-${timestampSlug()}-${addressTail}.txt`;
+    const filepath = path.join(outputDir, filename);
     const body = `Address : ${result.address}\nPrivate Key : ${result.privKey}\n`;
-    fs.writeFileSync(filepath, body, { mode: 0o600 });
+
+    fs.writeFileSync(filepath, body, { mode: 0o600, flag: 'wx' });
     return filepath;
 };
 
@@ -83,9 +89,10 @@ const security = () => {
     console.log();
     console.log(`  ${paint(C.green, '✓')} Entropy generated locally with randombytes`);
     console.log(`  ${paint(C.green, '✓')} Private key never sent to an AI/API by this CLI`);
-    console.log(`  ${paint(C.green, '✓')} Output file is created with owner-only mode when supported`);
+    console.log(`  ${paint(C.green, '✓')} Secret filenames are unique and never silently overwritten`);
+    console.log(`  ${paint(C.green, '✓')} wallets/ is ignored by Git`);
     console.log(`  ${paint(C.yellow, '!')} Output still contains a raw private key. Treat it as a secret.`);
-    console.log(`  ${paint(C.yellow, '!')} Never commit address_*.txt or mnemonic_*.txt to Git.`);
+    console.log(`  ${paint(C.yellow, '!')} Encrypted keystore export is the next security milestone.`);
     console.log();
 };
 
@@ -102,7 +109,7 @@ const runSearch = (args) => {
     console.log(`  ${paint(C.gray, '└')} ${paint(C.blue, 'Analyze')}  ${paint(C.gray, `pattern=${normalized} · ${isSuffix ? 'suffix' : 'prefix'} · case-insensitive`)}`);
     console.log(`  ${paint(C.gray, '└')} ${paint(C.blue, 'Estimate')} ${paint(C.gray, `16^${pattern.length} = ${fmt.format(space)} search space · ${level}`)}`);
     console.log();
-    console.log(`  ${paint(C.green, '●')} ${paint(C.green, 'Ready')} ${paint(C.gray, 'single local engine · raw secret file mode')}`);
+    console.log(`  ${paint(C.green, '●')} ${paint(C.green, 'Ready')} ${paint(C.gray, 'single local engine · unique secret file mode')}`);
     console.log();
 
     let lastRate = 0;
@@ -120,7 +127,7 @@ const runSearch = (args) => {
     });
 
     process.stdout.write('\r\x1b[2K');
-    const filepath = writeSecretFile(result, normalized);
+    const filepath = writeSecretFile(result, normalized, isSuffix);
     const seconds = result.elapsedMs / 1000;
 
     console.log(`  ${paint(C.green, '●')} ${paint(C.green, 'Match found')} ${paint(C.gray, `after ${fmt.format(result.attempts)} attempts`)}`);
@@ -132,7 +139,7 @@ const runSearch = (args) => {
     console.log(`  ${fmt.format(result.attempts)} attempts · ${fmt.format(result.rate || lastRate)} addr/s · ${seconds.toFixed(2)}s`);
     console.log();
     console.log(`  ${paint(C.gray, 'SECRET OUTPUT')}`);
-    console.log(`  Saved locally → ${paint(C.accent, path.basename(filepath))}`);
+    console.log(`  Saved locally → ${paint(C.accent, path.relative(process.cwd(), filepath))}`);
     console.log(`  ${paint(C.yellow, 'Private key is inside that file. Do not commit or share it.')}`);
     console.log();
 };

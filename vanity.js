@@ -1,21 +1,13 @@
-/* eslint-env worker */
 const secp256k1 = require('secp256k1');
 const keccak = require('keccak');
 const randomBytes = require('randombytes');
 const fs = require('fs');
 
-/**
- * Transform a private key into an address.
- */
 const privateToAddress = (privateKey) => {
     const pub = secp256k1.publicKeyCreate(privateKey, false).slice(1);
     return keccak('keccak256').update(pub).digest().slice(-20).toString('hex');
 };
 
-/**
- * Create a wallet from a random private key.
- * @returns {{address: string, privKey: string}}
- */
 const getRandomWallet = () => {
     const randbytes = randomBytes(32);
     return {
@@ -24,11 +16,8 @@ const getRandomWallet = () => {
     };
 };
 
-/**
- * Check if a wallet respects the input constraints.
- */
 const isValidVanityAddress = (address, input, isChecksum, isSuffix) => {
-    const subStr = isSuffix ? address.substr(40 - input.length) : address.substr(0, input.length);
+    const subStr = isSuffix ? address.slice(40 - input.length) : address.slice(0, input.length);
 
     if (!isChecksum) {
         return input === subStr;
@@ -54,10 +43,15 @@ const isValidChecksum = (address, input, isSuffix) => {
 };
 
 const toChecksumAddress = (address) => {
-    const hash = keccak('keccak256').update(address).digest().toString('hex');
+    const normalized = address.toLowerCase().replace(/^0x/, '');
+    if (!/^[0-9a-f]{40}$/.test(normalized)) {
+        throw new Error('Address must contain exactly 40 hexadecimal characters.');
+    }
+
+    const hash = keccak('keccak256').update(normalized).digest().toString('hex');
     let ret = '';
-    for (let i = 0; i < address.length; i++) {
-        ret += parseInt(hash[i], 16) >= 8 ? address[i].toUpperCase() : address[i];
+    for (let i = 0; i < normalized.length; i++) {
+        ret += parseInt(hash[i], 16) >= 8 ? normalized[i].toUpperCase() : normalized[i];
     }
     return ret;
 };
@@ -69,10 +63,15 @@ const getStats = (startedAt, attempts) => {
     return { elapsedMs, rate };
 };
 
-/**
- * Find exactly one vanity wallet and stop.
- * This is used by the interactive terminal UI.
- */
+const validatePattern = (input) => {
+    if (typeof input !== 'string' || !/^[0-9a-fA-F]+$/.test(input)) {
+        throw new Error('Pattern must contain hexadecimal characters only (0-9, A-F).');
+    }
+    if (input.length > 40) {
+        throw new Error('Pattern cannot be longer than an Ethereum address.');
+    }
+};
+
 const findVanityWallet = (input, options = {}) => {
     const {
         isChecksum = false,
@@ -81,13 +80,7 @@ const findVanityWallet = (input, options = {}) => {
         onProgress = null
     } = options;
 
-    if (typeof input !== 'string' || !/^[0-9a-fA-F]+$/.test(input)) {
-        throw new Error('Pattern must contain hexadecimal characters only (0-9, A-F).');
-    }
-
-    if (input.length > 40) {
-        throw new Error('Pattern cannot be longer than an Ethereum address.');
-    }
+    validatePattern(input);
 
     const pattern = isChecksum ? input : input.toLowerCase();
     const startedAt = process.hrtime.bigint();
@@ -115,18 +108,19 @@ const findVanityWallet = (input, options = {}) => {
     }
 };
 
-/**
- * Legacy continuous generator. It keeps searching and saves progressively
- * shorter matches down to minLength.
- */
 const getVanityWallet = async (input, isChecksum, isSuffix, minLength, cb) => {
+    validatePattern(input);
+    if (!Number.isInteger(minLength) || minLength < 1 || minLength > input.length) {
+        throw new Error('minLength must be an integer between 1 and the pattern length.');
+    }
+
     input = isChecksum ? input : input.toLowerCase();
     let wallet = getRandomWallet();
     let attempts = 1;
 
     for (;;) {
         for (let j = 0; j <= input.length - minLength; j++) {
-            const candidate = input.substr(0, input.length - j);
+            const candidate = input.slice(0, input.length - j);
             if (isValidVanityAddress(wallet.address, candidate, isChecksum, isSuffix)) {
                 fs.appendFileSync(
                     `address_0x${candidate}.txt`,
@@ -144,6 +138,8 @@ const getVanityWallet = async (input, isChecksum, isSuffix, minLength, cb) => {
 };
 
 module.exports = {
+    privateToAddress,
+    getRandomWallet,
     findVanityWallet,
     getVanityWallet,
     isValidVanityAddress,

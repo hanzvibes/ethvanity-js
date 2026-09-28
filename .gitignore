@@ -1,5 +1,7 @@
 node_modules/
+wallets/
 address_*.txt
+address_random.txt
 mnemonic_*.txt
 *.keystore.json
 .env

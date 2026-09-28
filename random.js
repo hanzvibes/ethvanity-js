@@ -1,46 +1,28 @@
-// Loading Screen
-console.clear()
-const loading = require('loading-cli');
-const load = loading("Generating Random Wallet").start();
-console.log("\n");
-console.log("- Generating Random Address...");
-console.log("\n");
-
-// Generate Random ETH Address
-const { generateMnemonic, EthHdWallet } = require('eth-hd-wallet')
-const wallet = EthHdWallet.fromMnemonic(generateMnemonic());
-const [ address ] = wallet.generateAddresses(1);
-const privateKey = wallet.getPrivateKey(address);
-const data = '...'
-const signature = wallet.sign({ address, data });
-const publicKey = wallet.recoverSignerPublicKey({ signature, data });
 const fs = require('fs');
-const BIP44_PATH = `m/44'/60'/0'/0`
+const path = require('path');
+const { generateMnemonic, EthHdWallet } = require('eth-hd-wallet');
 
-// Color Variable
-var color = require('colors-cli');
-var xaddress = color.blue_bt;
-var xprivatekey = color.yellow_bt;
-var xmnemonic = color.green_bt;
-var xsignature = color.red_bt;
-var xpath = color.magenta;
+const mnemonic = generateMnemonic();
+const wallet = EthHdWallet.fromMnemonic(mnemonic);
+const [address] = wallet.generateAddresses(1);
+const privateKey = wallet.getPrivateKey(address).toString('hex');
 
-// Generate Mnemonic
-let mnemonic = generateMnemonic();
+const outputDir = path.resolve(process.cwd(), 'wallets');
+fs.mkdirSync(outputDir, { recursive: true, mode: 0o700 });
 
-// Address Output
-console.log("\n");
-console.log(xaddress('- Address : ')+address);
-console.log(xprivatekey('- Private Key : ')+privateKey.toString('hex') );
-console.log(xmnemonic('- Mnemonic : ')+mnemonic);
-console.log(xsignature('- Signature : ')+signature);
-console.log(xpath('- Path : ')+BIP44_PATH);
+const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+const filename = `random-${stamp}-${address.slice(-8).toLowerCase()}.txt`;
+const filepath = path.join(outputDir, filename);
+const body = [
+    `Address : ${address}`,
+    `Private Key : ${privateKey}`,
+    `Mnemonic : ${mnemonic}`,
+    ''
+].join('\n');
 
-// Saving files...
-fs.appendFileSync('address_random.txt', "- Address : "+wallet.getAddresses() + '\n' + "- Private Key : "+privateKey.toString('hex') + '\n' + "- Mnemonic : "+mnemonic + '\n' + "- Signature : "+signature + '\n\n');
+fs.writeFileSync(filepath, body, { mode: 0o600, flag: 'wx' });
 
-// Reminder
-console.log("\n");
-load.succeed("File saved as address_random.txt");
-load.warn("Please don't share this data to Anyone !!");
-console.log("\n");
+console.log('Random Ethereum wallet generated locally.');
+console.log(`Address : ${address}`);
+console.log(`Saved secret material to ${path.relative(process.cwd(), filepath)}`);
+console.log('Keep that file private and never commit it to Git.');

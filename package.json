@@ -1,13 +1,17 @@
 {
   "name": "ethvanity-js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Local-first Ethereum vanity address generator with an interactive terminal agent UI",
   "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node index.js",
     "vanity": "node index.js",
     "mnemonic": "node mnemonic.js",
-    "random": "node random.js"
+    "random": "node random.js",
+    "test": "node --test"
   },
   "dependencies": {
     "ansi-colors": "^4.1.1",

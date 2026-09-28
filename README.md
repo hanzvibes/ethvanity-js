@@ -1,90 +1,91 @@
-![Logo](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/vanity.png)
-A Simple Script for Generate Vanity Address with CLI , I was recode This from [@ppabcd](https://github.com/ppabcd/vanity-cli)
+# ethvanity-js
 
-![GitHub top language](https://img.shields.io/github/languages/top/hanzvibes/ethvanity-js?style=for-the-badge)
+Local-first Ethereum vanity address generator with an interactive terminal UI.
 
-![GitHub last commit](https://img.shields.io/github/last-commit/hanzvibes/ethvanity-js?style=flat-square)
+> Security status: this project is still under active hardening. Generated private keys and mnemonics are sensitive. Do not use unreleased builds for funds you cannot afford to lose.
 
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hanzvibes/ethvanity-js?style=flat-square)
+## Features
 
-![GitHub](https://img.shields.io/github/license/hanzvibes/ethvanity-js?style=flat-square)
+- Prefix and suffix vanity address search
+- Local-only key generation
+- Interactive terminal commands
+- Search-space estimates and live attempts/second telemetry
+- Mnemonic vanity mode
+- Unique secret filenames to prevent silent overwrite
+- Secret output directory ignored by Git
 
-## 🌟 Features
+## Requirements
 
-- Mnemonic Support
-- More efficient usage of resources
-- Mobile-friendly
-- 100% Offline
+- Node.js 18 or newer
 
-## 📂 Clone Repository & Install
+## Install
 
 ```bash
 git clone https://github.com/hanzvibes/ethvanity-js
 cd ethvanity-js
-npm i
+npm install
 ```
-    
-## 👨‍💻 Run the Script
 
-Generate Vanity Address with Private-key Only ( Faster )
+## Interactive terminal
 
 ```bash
-  node index.js
+npm start
 ```
 
-Generate Vanity Address with Mnemonic Support ( Longer )
+Commands:
+
+```text
+run CAFE
+run BEEF --suffix
+explain DEADBEEF
+security
+help
+clear
+quit
+```
+
+Patterns are hexadecimal only: `0-9` and `A-F`.
+
+## Other modes
+
+Generate a random mnemonic wallet:
 
 ```bash
-  node mnemonic.js
+npm run random
 ```
 
+Run the legacy mnemonic vanity search:
 
-## 📑 Edit index.js
-
-```javascript
-getVanityWallet('yourinput', false, yourchecksum, yourlength, (message) => {
-    console.log(message)
-    })
-
-- yourinput = A - F / 0 - 8 , for example 000 / deadd / b00b
-- yourchecksum = 'true' is Case-sensitive , 'false' is Not Case-sensitive
-- yourlength = 2 - 4 , 3 is Recommended
+```bash
+npm run mnemonic
 ```
 
-## 📑 Edit mnemonic.js
+## Secret files
 
-```javascript
-let input = 'yourinput';
-let minLength = yourlength;
+Generated wallet material is stored under `wallets/` using unique filenames and owner-only file permissions when supported by the operating system.
 
-- yourinput = A - F / 0 - 8 , for example 000 / deadd / b00b
-- yourlength = 2 - 5
+The current format still contains raw private keys and, in mnemonic mode, the seed phrase. Treat every generated file as a high-value secret. Never upload it, paste it into an AI/chat service, or commit it to Git.
 
-* Recommended Length is 2 / 3
+Encrypted Ethereum keystore export is planned as the next security milestone.
+
+## Tests
+
+```bash
+npm test
 ```
 
+The core test suite covers deterministic private-key-to-address derivation, EIP-55 checksum formatting, prefix matching, suffix matching, and malformed address rejection.
 
-## 📱 CLI Output Example
+## Offline behavior
 
-![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/output.png)
+Vanity key generation and address derivation happen locally and do not require an Ethereum RPC connection. Dependencies still need to be installed before running the project.
 
-## 📱Output Files Example
+## Credits
 
-![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/address_0x00000.png)
+Original inspiration:
+- ppabcd/vanity-cli
+- bokub/vanity-eth
 
-## 📱Example of my Vanity Address
+## License
 
-![App Screenshot](https://github.com/hanzvibes/ethvanity-js/raw/main/assets/example.png)
-
-
-
-## 🔗 Source Code ( Original )
-- [@ppabcd](https://github.com/ppabcd/vanity-cli)
-## 🔗 Source Code vanity.js
-- [@bokub](https://github.com/bokub/vanity-eth) ( vanity-eth.tk )
-
-## 👥 Contact Me
-
-- [Facebook](https://fb.me/4RAEHAN)
-- [Instagram](https://instagram.com/hanzvibes)
-
+MIT
