@@ -1,6 +1,6 @@
 {
   "name": "ethvanity-js",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Local-first Ethereum vanity address generator with an interactive terminal agent UI",
   "main": "index.js",
   "engines": {
