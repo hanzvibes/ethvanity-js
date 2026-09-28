@@ -1,5 +1,6 @@
 node_modules/
 wallets/
+0x*.txt
 address_*.txt
 address_random.txt
 mnemonic_*.txt
