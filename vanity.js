@@ -1,6 +1,6 @@
 const secp256k1 = require('secp256k1');
 const keccak = require('keccak');
-const randomBytes = require('randombytes');
+const { randomBytes } = require('node:crypto');
 const fs = require('fs');
 
 const privateToAddress = (privateKey) => {
@@ -19,13 +19,8 @@ const getRandomWallet = () => {
 const isValidVanityAddress = (address, input, isChecksum, isSuffix) => {
     const subStr = isSuffix ? address.slice(40 - input.length) : address.slice(0, input.length);
 
-    if (!isChecksum) {
-        return input === subStr;
-    }
-    if (input.toLowerCase() !== subStr) {
-        return false;
-    }
-
+    if (!isChecksum) return input === subStr;
+    if (input.toLowerCase() !== subStr) return false;
     return isValidChecksum(address, input, isSuffix);
 };
 
@@ -35,9 +30,7 @@ const isValidChecksum = (address, input, isSuffix) => {
 
     for (let i = 0; i < input.length; i++) {
         const j = i + shift;
-        if (input[i] !== (parseInt(hash[j], 16) >= 8 ? address[j].toUpperCase() : address[j])) {
-            return false;
-        }
+        if (input[i] !== (parseInt(hash[j], 16) >= 8 ? address[j].toUpperCase() : address[j])) return false;
     }
     return true;
 };
@@ -67,19 +60,11 @@ const validatePattern = (input) => {
     if (typeof input !== 'string' || !/^[0-9a-fA-F]+$/.test(input)) {
         throw new Error('Pattern must contain hexadecimal characters only (0-9, A-F).');
     }
-    if (input.length > 40) {
-        throw new Error('Pattern cannot be longer than an Ethereum address.');
-    }
+    if (input.length > 40) throw new Error('Pattern cannot be longer than an Ethereum address.');
 };
 
 const findVanityWallet = (input, options = {}) => {
-    const {
-        isChecksum = false,
-        isSuffix = false,
-        progressEvery = 25000,
-        onProgress = null
-    } = options;
-
+    const { isChecksum = false, isSuffix = false, progressEvery = 25000, onProgress = null } = options;
     validatePattern(input);
 
     const pattern = isChecksum ? input : input.toLowerCase();
