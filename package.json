@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "vanity": "node index.js",
+    "parallel": "node parallel.js",
     "mnemonic": "node mnemonic.js",
     "random": "node random.js"
   },
