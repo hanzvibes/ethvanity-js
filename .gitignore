@@ -1,4 +1,6 @@
 node_modules/
+.next/
+out/
 address_*.txt
 mnemonic_*.txt
 *.keystore.json
