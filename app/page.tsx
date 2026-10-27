@@ -28,7 +28,7 @@ export default function Home() {
  const expectedAttempts = p.length ? 16 ** p.length : 0;
 
  const averageSeconds = expectedAttempts / SIMULATED_RATE;
- const [cliInput, setCliInput] = useState("help");
+ const [cliInput, setCliInput] = useState("");
  const [cliLines, setCliLines] = useState<string[]>([
   "ethvanity.js — terminal demo",
   "Mode demo: output disimulasikan, tidak ada wallet/private key yang dibuat.",
