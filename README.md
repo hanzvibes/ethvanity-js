@@ -151,9 +151,17 @@ The repository's `.gitignore` excludes `address_*.txt`, `mnemonic_*.txt`, keysto
 | `monitor.js` | Serves the monitor UI and local status endpoint |
 | `mnemonic.js` | Legacy mnemonic-based continuous search |
 | `random.js` | Legacy random-wallet output script |
-| `docs/index.html` | Static project landing page with an illustrative interactive preview |
+| `app/page.tsx` | Next.js landing page with an animated, interactive visual preview |
+| `app/globals.css` | Tailwind CSS and motion styles |
+| `app/layout.tsx` | Root layout and page metadata |
 
 The landing page's playground is a **visual demo only**. It does not run the real search engine, create wallets, or verify addresses.
+
+## Website development
+
+The landing page uses Next.js App Router and Tailwind CSS v4. Configure Vercel with the repository root as its Root Directory and let it detect Next.js automatically. Use `npm run build` to build the website, `npm run dev` for local development, and `npm run web` to serve a production build. The existing `npm start` command intentionally remains the interactive CLI entry point.
+
+The playground is a **visual simulation only**: it animates sample addresses and illustrative counters. It does not create wallets, private keys, benchmark hardware, or verify matches.
 
 ## Development notes
 
