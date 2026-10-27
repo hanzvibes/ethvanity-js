@@ -37,7 +37,7 @@ export default function Home() {
  const executeCli = (raw: string) => {
   const command = raw.trim();
   if (!command) return;
-  const args = command.toLowerCase().split(/\\s+/);
+  const args = command.toLowerCase().split(/\s+/);
   const name = args[0];
   const next: string[] = [`$ ${command}`];
   if (name === "clear") {
