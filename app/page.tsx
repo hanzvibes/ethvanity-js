@@ -10,8 +10,8 @@ function matches(value: string, pattern: string, mode: Mode) {
   const body = value.slice(2);
   return mode === "prefix" ? body.startsWith(pattern) : body.endsWith(pattern);
 }
-const seed = ["0x8a4d1c70e9b3f6a2d5c1b7e04f8a9d3c6b2e1f70","0x2f6a0c91b8d4e7f3a1c5d9e2b6f0a8c4d7e1b953","0x6e1b9d3a4f7c2e8a0d5b1f6c9a3e7d2b4f8c1a60","0x4c8e2a7d1f5b9c3e6a0d4f8b2e7c1a5d9f3b6e20"];
-const BATCH_SIZE = 256;
+const seed = ["0x8a4d1c70e9b3f6a2d5c1b7e04f8a9d3c6b2e1f70"];
+const BATCH_SIZE = 1;
 const TICK_MS = 250;
 const SIMULATED_RATE = Math.round((BATCH_SIZE * 1000) / TICK_MS);
 function formatDuration(seconds: number) {
@@ -40,7 +40,7 @@ export default function Home() {
    }
    setAttempts(n=>n+checked);
    setElapsed(n=>n+TICK_MS/1000);
-   setRows(prev=>[...batch.reverse(),...prev].slice(0,4));
+   setRows(batch.slice(-1));
    if(found){setMatch(found);setRunning(false)}
   },TICK_MS);
   return()=>window.clearInterval(id)
