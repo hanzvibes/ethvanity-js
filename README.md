@@ -151,7 +151,7 @@ The repository's `.gitignore` excludes `address_*.txt`, `mnemonic_*.txt`, keysto
 | `monitor.js` | Serves the monitor UI and local status endpoint |
 | `mnemonic.js` | Legacy mnemonic-based continuous search |
 | `random.js` | Legacy random-wallet output script |
-| `docs/index.html` | Static project landing page with an illustrative interactive preview |
+| `app/page.tsx` | Next.js landing page with an animated, interactive visual preview |\n| `app/globals.css` | Tailwind CSS and motion styles |\n| `app/layout.tsx` | Root layout and page metadata |
 
 The landing page's playground is a **visual demo only**. It does not run the real search engine, create wallets, or verify addresses.
 
