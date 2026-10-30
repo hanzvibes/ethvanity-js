@@ -1,6 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+const RemotionPreview = dynamic(() => import("../components/RemotionPreview"), {
+  ssr: false,
+  loading: () => (
+    <div className="grid aspect-video place-items-center rounded-2xl border border-neutral-800 bg-[#171915] text-sm text-neutral-400">
+      Memuat pratinjau motion…
+    </div>
+  ),
+});
 
 type Mode = "prefix" | "suffix";
 
@@ -310,6 +320,7 @@ export default function Home() {
             ethvanity<span className="text-neutral-400">.js</span>
           </a>
           <nav aria-label="Navigasi utama" className="flex items-center gap-5 text-xs text-neutral-600">
+            <a className="hidden md:block" href="#preview">Preview</a>
             <a className="hidden md:block" href="#playground">Simulasi</a>
             <a className="hidden md:block" href="#kalkulator">Kalkulator</a>
             <a className="hidden md:block" href="#install">Mulai pakai</a>
@@ -409,6 +420,25 @@ export default function Home() {
         <section className="flex flex-wrap items-center justify-between gap-5 border-y border-neutral-200 py-6">
           <p className="text-[10px] font-bold uppercase tracking-[.16em] text-neutral-500">Pencarian di perangkatmu</p>
           <div className="flex flex-wrap gap-6 text-xs text-neutral-500"><span>⌘ Node.js</span><span>◈ Proses paralel</span><span>⌁ Jalan di perangkatmu</span><span>↗ Kode terbuka</span></div>
+        </section>
+
+        <section id="preview" className="scroll-mt-6 py-20 sm:py-24">
+          <div className="mb-9 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[.17em] text-neutral-500">Preview motion · Remotion</p>
+              <h2 className="mt-4 text-4xl font-semibold leading-none tracking-[-.075em] sm:text-6xl">Lihat dulu, sebelum jalanin.</h2>
+            </div>
+            <p className="max-w-sm text-sm leading-7 text-neutral-600">
+              Mockup gerak 10 detik ini dibuat dengan Remotion: dari judul, terminal pencarian, sampai kecocokan pola CAFE.
+              Ini tetap simulasi visual — bukan pencarian asli dan tidak membuat wallet atau private key.
+            </p>
+          </div>
+          <RemotionPreview />
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-xl border border-neutral-200 bg-[#fffefa] p-4"><p className="text-sm font-semibold">Alur 4 adegan</p><p className="mt-1 text-xs leading-5 text-neutral-500">Intro → terminal pencarian → kecocokan → ajakan menjalankan secara lokal.</p></div>
+            <div className="rounded-xl border border-neutral-200 bg-[#fffefa] p-4"><p className="text-sm font-semibold">Bisa diputar &amp; digeser</p><p className="mt-1 text-xs leading-5 text-neutral-500">Pakai kontrol player untuk play, pause, dan scrub ke adegan tertentu.</p></div>
+            <div className="rounded-xl border border-neutral-200 bg-[#fffefa] p-4"><p className="text-sm font-semibold">Kode di repo</p><p className="mt-1 text-xs leading-5 text-neutral-500">Komposisinya ada di <code className="font-mono">remotion/EthvanityPreview.tsx</code>, siap dipakai ulang atau di-render jadi video.</p></div>
+          </div>
         </section>
 
         <section id="playground" className="scroll-mt-6 py-20 sm:py-24">
